@@ -1,0 +1,43 @@
+<html>
+	<title>Bingo Number Generator for Lelia</title>
+	 <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
+            crossorigin="anonymous"></script>
+	<script>
+		var allUsed = [];
+		function getNumber(min, max){
+			var randNumber = Math.floor(Math.random()*(max-min+1)+min);
+			
+			var letter = "";
+			if(randNumber <= 15){
+				letter = "B";
+			} else if(randNumber <= 30){
+				letter = "I";
+			} else if(randNumber <= 45){
+				letter = "N";
+			} else if(randNumber <= 60){
+				letter = "G";
+			} else {
+				letter = "O";
+			}
+			
+			var thisValue = letter +  "" + randNumber;
+						
+			if($.inArray(thisValue, allUsed) < 0){
+				allUsed.push(thisValue)
+				$("#numberElm").prepend(thisValue + "<br/>");
+			} else {
+				if(allUsed.length < 75){
+					getNumber(1, 75);
+				} else {
+					alert("All numbers used!");
+				}
+			}
+		}
+	</script>
+	<body>
+		<button onclick='getNumber(1, 75);'>Give me a number!</button>
+		
+		<h2 id='numberElm'></h2>
+	</body>
+</html>
